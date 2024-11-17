@@ -13,7 +13,7 @@ namespace WebHM.Models
         public decimal TongDoanhThu { get; set; }
 
         // Quan hệ với AspNetUsers và SanPham
-        public IdentityUser NguoiBan { get; set; }
+        public ApplicationUser NguoiBan { get; set; }
         public SanPham SanPham { get; set; }
     }
 }

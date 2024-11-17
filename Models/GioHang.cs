@@ -12,7 +12,7 @@ namespace WebHM.Models
         public int SoLuong { get; set; }
 
         // Quan hệ với AspNetUsers và SanPham
-        public IdentityUser KhachHang { get; set; }
+        public ApplicationUser KhachHang { get; set; }
         public SanPham SanPham { get; set; }
     }
 }

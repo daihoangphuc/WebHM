@@ -17,7 +17,7 @@ namespace WebHM.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.31")
+                .HasAnnotation("ProductVersion", "6.0.35")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -72,71 +72,6 @@ namespace WebHM.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -222,6 +157,98 @@ namespace WebHM.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("WebHM.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiaChi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiaChiCuaHang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MaSoThue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NgayDangKyCuaHang")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgaySinh")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayTaoTaiKhoan")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenCuaHang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UrlAnhDaiDien")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("WebHM.Models.BinhLuan", b =>
@@ -347,12 +374,20 @@ namespace WebHM.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDonHang"), 1L, 1);
 
+                    b.Property<string>("DiaChiGiaoHang")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("KhachHangId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("NgayDatHang")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("SoDienThoaiGiaoHang")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("TongTien")
                         .HasColumnType("decimal(18,2)");
@@ -366,6 +401,37 @@ namespace WebHM.Data.Migrations
                     b.HasIndex("KhachHangId");
 
                     b.ToTable("DonHangs");
+                });
+
+            modelBuilder.Entity("WebHM.Models.DonHangVanChuyen", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("MaDonHang")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaVanChuyen")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NgayCapNhat")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TrangThai")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaDonHang");
+
+                    b.HasIndex("MaVanChuyen");
+
+                    b.ToTable("DonHangVanChuyens");
                 });
 
             modelBuilder.Entity("WebHM.Models.GioHang", b =>
@@ -516,6 +582,33 @@ namespace WebHM.Data.Migrations
                     b.ToTable("ThongKeDoanhSos");
                 });
 
+            modelBuilder.Entity("WebHM.Models.VanChuyen", b =>
+                {
+                    b.Property<int>("MaVanChuyen")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaVanChuyen"), 1L, 1);
+
+                    b.Property<string>("MoTa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PhiVanChuyen")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
+
+                    b.Property<string>("TenNhaVanChuyen")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("MaVanChuyen");
+
+                    b.ToTable("VanChuyens");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -527,7 +620,7 @@ namespace WebHM.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WebHM.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -536,7 +629,7 @@ namespace WebHM.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WebHM.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -551,7 +644,7 @@ namespace WebHM.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WebHM.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -560,7 +653,7 @@ namespace WebHM.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WebHM.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -569,7 +662,7 @@ namespace WebHM.Data.Migrations
 
             modelBuilder.Entity("WebHM.Models.BinhLuan", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "KhachHang")
+                    b.HasOne("WebHM.Models.ApplicationUser", "KhachHang")
                         .WithMany()
                         .HasForeignKey("KhachHangId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -607,7 +700,7 @@ namespace WebHM.Data.Migrations
 
             modelBuilder.Entity("WebHM.Models.DanhGia", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "KhachHang")
+                    b.HasOne("WebHM.Models.ApplicationUser", "KhachHang")
                         .WithMany()
                         .HasForeignKey("KhachHangId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -626,7 +719,7 @@ namespace WebHM.Data.Migrations
 
             modelBuilder.Entity("WebHM.Models.DonHang", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "KhachHang")
+                    b.HasOne("WebHM.Models.ApplicationUser", "KhachHang")
                         .WithMany()
                         .HasForeignKey("KhachHangId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -635,9 +728,28 @@ namespace WebHM.Data.Migrations
                     b.Navigation("KhachHang");
                 });
 
+            modelBuilder.Entity("WebHM.Models.DonHangVanChuyen", b =>
+                {
+                    b.HasOne("WebHM.Models.DonHang", "DonHang")
+                        .WithMany()
+                        .HasForeignKey("MaDonHang")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebHM.Models.VanChuyen", "VanChuyen")
+                        .WithMany()
+                        .HasForeignKey("MaVanChuyen")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("DonHang");
+
+                    b.Navigation("VanChuyen");
+                });
+
             modelBuilder.Entity("WebHM.Models.GioHang", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "KhachHang")
+                    b.HasOne("WebHM.Models.ApplicationUser", "KhachHang")
                         .WithMany()
                         .HasForeignKey("KhachHangId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -673,7 +785,7 @@ namespace WebHM.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "NguoiBan")
+                    b.HasOne("WebHM.Models.ApplicationUser", "NguoiBan")
                         .WithMany()
                         .HasForeignKey("NguoiBanId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -686,7 +798,7 @@ namespace WebHM.Data.Migrations
 
             modelBuilder.Entity("WebHM.Models.ThanhToan", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "KhachHang")
+                    b.HasOne("WebHM.Models.ApplicationUser", "KhachHang")
                         .WithMany()
                         .HasForeignKey("KhachHangId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -703,7 +815,7 @@ namespace WebHM.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "NguoiBan")
+                    b.HasOne("WebHM.Models.ApplicationUser", "NguoiBan")
                         .WithMany()
                         .HasForeignKey("NguoiBanId")
                         .OnDelete(DeleteBehavior.Restrict)

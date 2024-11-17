@@ -13,27 +13,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using WebHM.Models;
+using WebHM.Services;
 
 namespace WebHM.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserStore<ApplicationUser> _userStore;
+        private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            IUserStore<IdentityUser> userStore,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            IUserStore<ApplicationUser> userStore,
+            SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -79,6 +80,22 @@ namespace WebHM.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [Required]
+            [Display(Name = "Họ tên")]
+            public string HoTen { get; set; }
+
+            [Required]
+            [Display(Name = "Địa chỉ")]
+            public string DiaChi  { get; set; }
+
+            [Required]
+            [DataType(DataType.DateTime)]
+            [Display(Name = "Ngày sinh")]
+            public DateTime NgaySinh { get; set; }
+
+            [Required]
+            [Display(Name = "Ảnh đại diện")]
+            public IFormFile UrlAnhDaiDien { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -113,6 +130,23 @@ namespace WebHM.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.HoTen = Input.HoTen;
+                user.DiaChi = Input.DiaChi;
+                user.NgaySinh = Input.NgaySinh;
+
+                // Xử lý tệp ảnh đại diện
+                if (Input.UrlAnhDaiDien != null)
+                {
+                    // Tạo đường dẫn lưu ảnh (ví dụ: lưu trong thư mục "wwwroot/images/avatars")
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "avatars", Guid.NewGuid().ToString() + Path.GetExtension(Input.UrlAnhDaiDien.FileName));
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await Input.UrlAnhDaiDien.CopyToAsync(stream);
+                    }
+
+                    user.UrlAnhDaiDien = "/images/avatars/" + Path.GetFileName(filePath);
+                }
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -144,37 +178,39 @@ namespace WebHM.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Nếu có lỗi, trả về form đăng ký
             return Page();
         }
 
-        private IdentityUser CreateUser()
+
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<IdentityUser> GetEmailStore()
+        private IUserEmailStore<ApplicationUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<IdentityUser>)_userStore;
+            return (IUserEmailStore<ApplicationUser>)_userStore;
         }
     }
 }

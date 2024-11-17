@@ -13,6 +13,6 @@ namespace WebHM.Models
         public string PhuongThuc { get; set; } // Ví dụ: thẻ tín dụng, PayPal, v.v.
 
         // Quan hệ với AspNetUsers
-        public IdentityUser KhachHang { get; set; }
+        public ApplicationUser KhachHang { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace WebHM.Models
 
         // Quan hệ với SanPham và AspNetUsers
         public SanPham SanPham { get; set; }
-        public IdentityUser KhachHang { get; set; }
+        public ApplicationUser KhachHang { get; set; }
     }
 }

@@ -13,6 +13,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\HocKy7\\WebHM\\WebHM\\WebHM\\wwwroot\\images\\avatars\\373baf02-e990-4a07-8c9b-00ba7a99ac54.png",
+      "PackagePath": "staticwebassets\\images\\avatars\\373baf02-e990-4a07-8c9b-00ba7a99ac54.png"
+    },
+    {
+      "Id": "D:\\HocKy7\\WebHM\\WebHM\\WebHM\\wwwroot\\images\\avatars\\e95c8da7-cc4d-47c1-8b74-505facf13413.png",
+      "PackagePath": "staticwebassets\\images\\avatars\\e95c8da7-cc4d-47c1-8b74-505facf13413.png"
+    },
+    {
+      "Id": "D:\\HocKy7\\WebHM\\WebHM\\WebHM\\wwwroot\\images\\avatars\\logo-tvu.png",
+      "PackagePath": "staticwebassets\\images\\avatars\\logo-tvu.png"
+    },
+    {
       "Id": "D:\\HocKy7\\WebHM\\WebHM\\WebHM\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -22,7 +22,7 @@ namespace WebHM.Models
         public DanhMuc DanhMuc { get; set; }
 
         public string NguoiBanId { get; set; }
-        public IdentityUser NguoiBan { get; set; }
+        public ApplicationUser NguoiBan { get; set; }
 
         // Các thuộc tính ICollection để xác định quan hệ một-nhiều
         public ICollection<DanhGia> DanhGias { get; set; } = new List<DanhGia>();
